@@ -1,0 +1,30 @@
+id: io.github.q962.freedesktop.extension.Platform
+runtime: org.freedesktop.Platform
+runtime-version: '21.08'
+branch: '21.08'
+build-runtime: true
+sdk: org.freedesktop.Sdk
+# need to be added manually
+# see https://docs.flatpak.org/en/latest/available-runtimes.html
+inherit-extensions:
+  - org.freedesktop.Platform.GL
+  - org.freedesktop.Platform.VulkanLayer
+  - org.freedesktop.Platform.Timezones
+  - org.freedesktop.Platform.GStreamer
+  - org.freedesktop.Platform.Icontheme
+  - org.gtk.Gtk3theme
+  - org.freedesktop.Platform.VAAPI.Intel
+  - org.freedesktop.Platform.openh264
+# add a new extensions
+add-extensions:
+  # Support complex metadata, I don't know
+  # Maybe https://www.freedesktop.org/software/appstream/docs/index.html
+  io.github.q962.freedesktop.extension.Platform.common.extension:
+    directory: lib/extensions
+modules:
+  - name: mk_extensions_dir
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /usr/lib/extensions
+
+
